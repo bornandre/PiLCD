@@ -1,0 +1,17 @@
+[Unit]
+Description=Pi LCD driver
+After=network.service
+ 
+[Service]
+User=pi
+Group=pi
+Type=simple
+WorkingDirectory=/tmp
+ExecStart=/usr/local/bin/pilcd
+ExecStop=kill $(cat /tmp/pilcd.lock)
+PIDFile=/tmp/pilcd.lock
+RestartSec=60
+Restart=always
+ 
+[Install]
+WantedBy=multi-user.target
